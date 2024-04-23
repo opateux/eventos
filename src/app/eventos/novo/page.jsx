@@ -21,7 +21,7 @@ export default function CadastroEvento() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/eventos"); // Caminho para a API
+        const response = await axios.get("/api/eventos");
         setEventos(response.data);
       } catch (error) {
         console.error("Erro ao carregar eventos:", error);
@@ -43,8 +43,8 @@ export default function CadastroEvento() {
         local,
       };
 
-      const response = await axios.post("/api/eventos", novoEvento); // Caminho para a API
-      setMensagem("Evento cadastrado com sucesso!");
+      const response = await axios.post("/api/eventos", novoEvento);
+      setMensagem("Evento cadastrado!");
       setNome('');
       setDescricao('');
       setData('');

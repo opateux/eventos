@@ -8,15 +8,10 @@ import { FaUsers } from 'react-icons/fa';
 import { BiStats } from 'react-icons/bi';
 
 export default function Navbar({ currentPath }) {
-  // Controlar a aba ativa
   const [activeTab, setActiveTab] = useState('');
-
-  // Atualizar a aba ativa ao mudar de página
   useEffect(() => {
     setActiveTab(currentPath);
   }, [currentPath]);
-
-  // componente
   return (
     <nav className="navbar">
       <div className="container">
@@ -60,7 +55,6 @@ export default function Navbar({ currentPath }) {
         </ul>
       </div>
 
-      {/* CSS do componente */}
       <style jsx>{`
         .navbar {
           background: -webkit-linear-gradient(90deg, #4f7047, #006061, #174867); /* Gradiente linear */
