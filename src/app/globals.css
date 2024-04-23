@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: -webkit-linear-gradient(10deg, #630101, #0a042b, #4f10d7);                                        
+    height: 100vh; /*altura do corpo */
+  }
+  
