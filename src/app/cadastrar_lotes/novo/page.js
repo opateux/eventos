@@ -72,39 +72,39 @@ export default function CadastroLotes() {
   };
 
   return (
-    <div className="container">
+    <div className="main-container">
+      {/* Container do formulário de cadastro */}
       <div className="form-container">
-        <h1>Cadastro de Lotes de Ingresso</h1>
-        {/* Formulário de cadastro de lotes */}
+        <h1 style={{ color: '#ffffff' }}>Cadastro de Lotes de Ingresso</h1>
         <form onSubmit={handleSubmit} className="form">
           <div className="form-group">
-            <label htmlFor="nome">Nome:</label>
+            <label htmlFor="nome" style={{ color: '#ffffff' }}>Nome:</label>
             <input type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
           </div>
           <div className="form-group">
-            <label htmlFor="descricao">Descrição:</label>
+            <label htmlFor="descricao" style={{ color: '#ffffff' }}>Descrição:</label>
             <textarea id="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)} required />
           </div>
           <div className="form-group">
-            <label htmlFor="quantidade">Quantidade:</label>
+            <label htmlFor="quantidade" style={{ color: '#ffffff' }}>Quantidade:</label>
             <input type="number" id="quantidade" value={quantidade} onChange={(e) => setQuantidade(e.target.value)} required />
           </div>
           <div className="form-group">
-            <label htmlFor="valor">Valor:</label>
+            <label htmlFor="valor" style={{ color: '#ffffff' }}>Valor:</label>
             <input type="number" id="valor" value={valor} onChange={(e) => setValor(e.target.value)} required />
           </div>
-          <button type="submit" className="button">Cadastrar</button>
+          <button type="submit" className="button" style={{ color: '#ffffff' }}>Cadastrar</button>
         </form>
-        {/* Exibe mensagem de sucesso ou erro */}
-        {mensagem && <p>{mensagem}</p>}
+        {mensagem && <p style={{ color: '#ffffff' }}>{mensagem}</p>}
       </div>
-      {/* Lista de lotes cadastrados */}
+  
+      {/* Container da lista de lotes cadastrados */}
       <div className="lista-container">
-        <h2>Lotes de Ingresso Cadastrados</h2>
+        <h2 style={{ color: '#ffffff' }}>Lotes de Ingresso Cadastrados</h2>
         <ul>
           {lotes.map((lote) => (
             <li key={lote.id} className="lote-item">
-              <div className="lote-info">
+              <div className="lote-info" style={{ color: '#ffffff' }}>
                 <strong>Nome: </strong>{lote.nome}<br />
                 <strong>Descrição: </strong>{lote.descricao}<br />
                 <strong>Quantidade: </strong>{lote.quantidade}<br />
@@ -114,38 +114,40 @@ export default function CadastroLotes() {
           ))}
         </ul>
       </div>
+  
       <style jsx>{`
-        .container {
+        .main-container {
           max-width: 800px;
           margin: 0 auto;
           padding: 20px;
           display: flex;
           justify-content: space-between;
         }
-
-        .form-container {
-          flex: 0 0 45%;
-        }
-
+  
+        .form-container,
         .lista-container {
           flex: 0 0 45%;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 20px;
         }
-
-        h1 {
+  
+  
+        h1, h2 {
           font-size: 24px;
           margin-bottom: 20px;
         }
-
+  
         .form-group {
           margin-bottom: 20px;
         }
-
+  
         label {
           display: block;
           margin-bottom: 5px;
           font-weight: bold;
         }
-
+  
         input[type="text"],
         input[type="number"],
         textarea {
@@ -155,12 +157,12 @@ export default function CadastroLotes() {
           border: 1px solid #ccc;
           border-radius: 5px;
         }
-
+  
         textarea {
           resize: vertical;
           height: 100px;
         }
-
+  
         .button {
           width: 100%;
           padding: 10px;
@@ -171,24 +173,24 @@ export default function CadastroLotes() {
           border-radius: 5px;
           cursor: pointer;
         }
-
+  
         .button:hover {
           background-color: #0056b3;
         }
-
+  
         ul {
           list-style: none;
           padding: 0;
           margin: 0;
         }
-
+  
         .lote-item {
           border: 1px solid #ccc;
           border-radius: 5px;
           padding: 10px;
           margin-bottom: 10px;
         }
-
+  
         .lote-info {
           font-size: 16px;
         }

@@ -3,17 +3,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function CadastroClientes() { const [clientes, setClientes] = useState([]);
-                                             const [nome, setNome] = useState('');
-                                             const [email, setEmail] = useState('');
-                                             const [mensagem, setMensagem] = useState('');
+export default function CadastroClientes() {
+  const [clientes, setClientes] = useState([]);
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [mensagem, setMensagem] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
-        try {
+      try {
         const response = await axios.get("/api/clientes");
         setClientes(response.data);
-        } catch (error) {
+      } catch (error) {
         console.error("Erro ao carregar clientes:", error);
       }
     };
@@ -42,39 +43,44 @@ export default function CadastroClientes() { const [clientes, setClientes] = use
 
   return (
     <div className="container">
-      <h1>Cadastro de Clientes</h1>
+      <h1>Cadastro de Clientes </h1>
       <form onSubmit={handleSubmit} className="form">
         <div className="form-group">
-          <label htmlFor="nome">Nome:</label>
+          <label htmlFor="nome" style={{ color: '#ffffff' }}>Nome:</label>
           <input type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
-          {mensagem && <p>{mensagem}</p>}
+          {mensagem && <p style={{ color: '#ffffff' }}>{mensagem}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email" style={{ color: '#ffffff' }}>Email:</label>
           <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          {mensagem && <p>{mensagem}</p>}
+          {mensagem && <p style={{ color: '#ffffff' }}>{mensagem}</p>}
         </div>
-        <button type="submit" className="button">Cadastrar Cliente</button>
+        <button type="submit" className="button" style={{ color: '#ffffff' }}>Cadastrar Cliente</button>
       </form>
       <div className="clientes">
-        <h2>Clientes Cadastrados</h2>
+        <h2 style={{ color: '#ffffff' }}>Clientes Cadastrados</h2>
         <ul>
           {clientes.map((cliente) => (
             <li key={cliente.id}>
-              <strong>{cliente.nome}</strong> - {cliente.email}
+              <strong style={{ color: '#ffffff' }}>{cliente.nome}</strong> - <span style={{ color: '#ffffff' }}>{cliente.email}</span>
             </li>
           ))}
         </ul>
       </div>
+
       <style jsx>{`
         .container {
           max-width: 800px;
           margin: 0 auto;
           padding: 20px;
+          text-align: center;
+          border: 1px solid #ffffff;
+          border-radius: 5px;
         }
         h1 {
           font-size: 24px;
           margin-bottom: 20px;
+          color: #ffffff;
         }
         .form-group {
           margin-bottom: 20px;
@@ -89,14 +95,16 @@ export default function CadastroClientes() { const [clientes, setClientes] = use
           width: 100%;
           padding: 10px;
           font-size: 16px;
-          border: 1px solid #ccc;
+          border: 1px solid #ffffff;
           border-radius: 5px;
+          color: #ffffff;
+          background-color: transparent;
         }
         .button {
           width: 100%;
           padding: 10px;
           font-size: 16px;
-          color: #fff;
+          color: #ffffff;
           background-color: #007bff;
           border: none;
           border-radius: 5px;
@@ -106,7 +114,7 @@ export default function CadastroClientes() { const [clientes, setClientes] = use
           background-color: #0056b3;
         }
         .clientes {
-          border: 1px solid #ccc;
+          border: 1px solid #ffffff;
           border-radius: 5px;
           padding: 20px;
           margin-top: 20px;
@@ -114,6 +122,7 @@ export default function CadastroClientes() { const [clientes, setClientes] = use
         h2 {
           font-size: 20px;
           margin-bottom: 10px;
+          color: #ffffff;
         }
         ul {
           list-style: none;

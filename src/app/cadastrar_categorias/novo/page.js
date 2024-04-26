@@ -1,58 +1,52 @@
-"use client";
+"use client"
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as yup from 'yup';
 
-export default function CadastroEvento() {
-  const [eventos, setEventos] = useState([]);
+export default function CadastroCategoriaIngresso() {
+  const [categorias, setCategorias] = useState([]); 
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [data, setData] = useState('');
-  const [local, setLocal] = useState('');
   const [mensagem, setMensagem] = useState('');
 
   const schema = yup.object().shape({
     nome: yup.string().required('Nome é obrigatório'),
     descricao: yup.string().required('Descrição é obrigatória'),
-    data: yup.date().required('Data é obrigatória'),
-    local: yup.string().required('Local é obrigatório'),
   });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/eventos");
-        setEventos(response.data);
+        const response = await axios.get("/api/categorias-ingresso");
+        setCategorias(response.data); 
       } catch (error) {
-        console.error("Erro ao carregar eventos:", error);
+        console.error("Erro ao carregar categorias de ingresso:", error);
       }
     };
     fetchData();
   }, []);
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await schema.validate({ nome, descricao, data, local });
+      await schema.validate({ nome, descricao });
 
-      const novoEvento = {
+      const novaCategoria = {
         nome,
         descricao,
-        data,
-        local,
       };
 
-      const response = await axios.post("/api/eventos", novoEvento);
-      setMensagem("Evento cadastrado!");
+      const response = await axios.post("/api/categorias-ingresso", novaCategoria);
+      setMensagem("Categoria de ingresso cadastrada!");
       setNome('');
       setDescricao('');
-      setData('');
-      setLocal('');
-      setEventos([...eventos, response.data]);
+      setCategorias([...categorias, response.data]);
     } catch (error) {
-      setMensagem("Erro ao cadastrar evento.");
-      console.error("Erro ao cadastrar evento:", error);
+      setMensagem("Erro ao cadastrar categoria do ingresso.");
+      console.error("Erro ao cadastrar categoria do ingresso:", error);
     }
   };
 
@@ -60,43 +54,33 @@ export default function CadastroEvento() {
     <div className="container">
       <div className="grid">
         <div className="form">
-          <h1>Cadastro de Evento</h1>
+          <h1 style={{ color: '#ffffff' }}>Categoria de Ingresso</h1>
           <form onSubmit={handleSubmit} className="form">
             <div className="form-group">
-              <label htmlFor="nome">Nome:</label>
+              <label htmlFor="nome" style={{ color: '#ffffff' }}>Nome:</label>
               <input type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
             </div>
             <div className="form-group">
-              <label htmlFor="descricao">Descrição:</label>
+              <label htmlFor="descricao" style={{ color: '#ffffff' }}>Descrição:</label>
               <textarea id="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)} required />
             </div>
-            <div className="form-group">
-              <label htmlFor="data">Data:</label>
-              <input type="date" id="data" value={data} onChange={(e) => setData(e.target.value)} required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="local">Local:</label>
-              <input type="text" id="local" value={local} onChange={(e) => setLocal(e.target.value)} required />
-            </div>
-            <button type="submit" className="button">Cadastrar</button>
+            <button type="submit" className="button" style={{ color: '#ffffff' }}>Cadastrar Categoria de Ingresso</button>
           </form>
-          {mensagem && <p>{mensagem}</p>}
+          {mensagem && <p style={{ color: '#ffffff' }}>{mensagem}</p>}
         </div>
-        <div className="eventos">
-          <h2>Eventos Cadastrados</h2>
-          <div className="grid-eventos">
-            {eventos.map((evento) => (
-              <div key={evento.id} className="evento">
-                <h3>{evento.nome}</h3>
-                <p><strong>Descrição:</strong> {evento.descricao}</p>
-                <p><strong>Data:</strong> {new Date(evento.data).toLocaleDateString()}</p>
-                <p><strong>Local:</strong> {evento.local}</p>
-              </div>
+        <div className="categorias">
+          <h2 style={{ color: '#ffffff' }}>Categorias Cadastradas</h2>
+          <ul>
+            {categorias.map((categoria) => (
+              <li key={categoria.id}>
+                <strong style={{ color: '#ffffff' }}>{categoria.nome}</strong> - <span style={{ color: '#ffffff' }}>{categoria.descricao}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
 
+      
       <style jsx>{`
         .container {
           max-width: 800px;
@@ -132,7 +116,6 @@ export default function CadastroEvento() {
         }
 
         input[type="text"],
-        input[type="date"],
         textarea {
           width: 100%;
           padding: 10px;
@@ -161,7 +144,7 @@ export default function CadastroEvento() {
           background-color: #0056b3;
         }
 
-        .eventos {
+        .categorias {
           border: 1px solid #ccc;
           border-radius: 5px;
           padding: 20px;
@@ -172,21 +155,14 @@ export default function CadastroEvento() {
           margin-bottom: 10px;
         }
 
-        .grid-eventos {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-          gap: 20px;
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
         }
 
-        .evento {
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          padding: 10px;
-        }
-
-        .evento h3 {
-          margin-top: 0;
-          margin-bottom: 10px;
+        li {
+          margin-bottom: 5px;
         }
       `}</style>
     </div>
