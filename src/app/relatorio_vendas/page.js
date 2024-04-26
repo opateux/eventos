@@ -5,20 +5,16 @@ import axios from 'axios';
 import Chart from 'react-apexcharts';
 
 export default function RelatorioVendas() {
-  // Estado para armazenar as vendas e o total vendido
+
   const [vendas, setVendas] = useState([]);
   const [totalVendido, setTotalVendido] = useState(0);
 
-  // Função para buscar as vendas ao carregar o componente
   useEffect(() => {
     async function fetchVendas() {
       try {
         const response = await axios.get("/api/relatorio-vendas");
-        // Atualiza o estado das vendas
         setVendas(response.data);
-        // Calcula o total vendido somando o valorTotal de todas as vendas
         const total = response.data.reduce((acc, venda) => acc + venda.valorTotal, 0);
-        // Atualiza o estado do total vendido
         setTotalVendido(total);
       } catch (error) {
         console.error("Erro ao buscar relatório de vendas:", error);
@@ -27,7 +23,6 @@ export default function RelatorioVendas() {
     fetchVendas();
   }, []);
 
-  // Configurações do gráfico
   const options = {
     chart: {
       type: 'bar',
@@ -51,15 +46,27 @@ export default function RelatorioVendas() {
     },
     yaxis: {
       title: {
-        text: 'Valor Total Vendido'
+        text: 'Valor Total Vendido',
+        style: {
+          fontSize: '16px',
+          fontWeight: 600,
+          fontFamily: 'Arial, sans-serif',
+          color: '#555555'
+        }
+      },
+      labels: {
+        style: {
+          fontSize: '14px',
+          fontFamily: 'Arial, sans-serif',
+          colors: '#555555'
+        }
       }
     },
     fill: {
-      colors: ['#007bff'] // Cor do gráfico
+      colors: ['#007bff']
     }
   };
 
-  // Dados do gráfico
   const series = [{
     name: 'Vendas',
     data: vendas.map(venda => venda.valorTotal)
@@ -72,20 +79,22 @@ export default function RelatorioVendas() {
         <Chart options={options} series={series} type="bar" height={350} />
       </div>
       <div className="total">
-        {/* Exibe o total vendido com cor azul */}
         <h2>Total Vendido: R$ {totalVendido.toFixed(2)}</h2>
       </div>
-      {/* Estilos CSS */}
-      <style jsx>{`
-        .container {
+
+      <style jsx>{`        .container {
           max-width: 800px;
           margin: 0 auto;
           padding: 20px;
+          background-color: #f9f9f9;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
           font-size: 24px;
           margin-bottom: 20px;
+          color: #333333;
         }
 
         .chart {
@@ -100,6 +109,7 @@ export default function RelatorioVendas() {
         .total h2 {
           font-size: 24px;
           color: #007bff; /* Cor azul */
+          margin-top: 20px;
         }
       `}</style>
     </div>

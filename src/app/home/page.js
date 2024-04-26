@@ -1,54 +1,45 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { AiOutlineCalendar } from 'react-icons/ai';
-import { BsCardChecklist } from 'react-icons/bs';
-import { IoTicketOutline } from 'react-icons/io5';
-import { FaUsers } from 'react-icons/fa';
-import { BiStats } from 'react-icons/bi';
 
 export default function Navbar({ currentPath }) {
   const [activeTab, setActiveTab] = useState('');
   useEffect(() => {
     setActiveTab(currentPath);
   }, [currentPath]);
+
+
   return (
     <nav className="navbar">
       <div className="container">
         <ul className="nav-links">
           <li>
-            <div className={`nav-link ${activeTab === '/cadastro_eventos/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastro_eventos/novo'}>
-              <AiOutlineCalendar className="icon" />
-              <span>Cadastro de Eventos</span>
+            <div className={`nav-link ${activeTab === '/cadastrar_eventos/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastrar_eventos/novo'}>
+              <span>Cadastrar Evento</span>
             </div>
           </li>
           <li>
-            <div className={`nav-link ${activeTab === '/cadastro_categorias/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastro_categorias/novo'}>
-              <BsCardChecklist className="icon" />
-              <span>Categorias de Ingressos</span>
+            <div className={`nav-link ${activeTab === '/cadastrar_categorias/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastrar_categorias/novo'}>
+              <span>Categoria de Ingresso</span>
             </div>
           </li>
           <li>
-            <div className={`nav-link ${activeTab === '/cadastro_lotes/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastro_lotes/novo'}>
-              <IoTicketOutline className="icon" />
+            <div className={`nav-link ${activeTab === '/cadastrar_lotes/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastrar_lotes/novo'}>
               <span>Lotes de Ingressos</span>
             </div>
           </li>
           <li>
-            <div className={`nav-link ${activeTab === '/cadastro_ingressos/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastro_ingressos/novo'}>
-              <IoTicketOutline className="icon" />
-              <span>Cadastro de Ingressos</span>
+            <div className={`nav-link ${activeTab === '/cadastrar_ingressos/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastrar_ingressos/novo'}>
+              <span>Cadastrar Ingressos</span>
             </div>
           </li>
           <li>
-            <div className={`nav-link ${activeTab === '/cadastro_clientes/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastro_clientes/novo'}>
-              <FaUsers className="icon" />
-              <span>Clientes</span>
+            <div className={`nav-link ${activeTab === '/cadastrar_clientes/novo' ? 'active' : ''}`} onClick={() => window.location.href = '/cadastrar_clientes/novo'}>
+              <span>Cadastrar Clientes</span>
             </div>
           </li>
           <li>
             <div className={`nav-link ${activeTab === '/relatorio_vendas' ? 'active' : ''}`} onClick={() => window.location.href = '/relatorio_vendas'}>
-              <BiStats className="icon" />
               <span>Relatório de Vendas</span>
             </div>
           </li>
@@ -56,10 +47,14 @@ export default function Navbar({ currentPath }) {
       </div>
 
       <style jsx>{`
+
         .navbar {
-          background: -webkit-linear-gradient(90deg, #4f7047, #006061, #174867); /* Gradiente linear */
-          background: linear-gradient(90deg, #4f7047, #006061, #174867); /* Gradiente linear */
-          padding: 10px 0;
+          
+          padding: 100px 0;
+          transition: transform 0.3s ease;
+          font-weight: 700;
+          color: #fffffff;
+          
         }
 
         .container {
@@ -72,35 +67,54 @@ export default function Navbar({ currentPath }) {
 
         .nav-links {
           list-style-type: none;
-          margin: 0;
-          padding: 0;
-          display: flex;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
         }
 
         .nav-links li {
           margin-right: 20px;
+          text-align: center
         }
 
         .nav-links li:last-child {
           margin-right: 0;
+          text-align: center
         }
 
         .nav-link {
-          color: #fff;
-          font-size: 18px;
+          color: #ffffff;
+          font-size: 20px;
           cursor: pointer;
           display: flex;
           align-items: center;
+          transition: transform 0.10s ease;
+          transform: translateX(10px);
+          border: 1px solid #ffffff;
+          border-radius: 30px;
+          padding: 10px; 
+
         }
 
         .nav-link:hover,
         .active {
-          color: #ccc;
+          background-color: #ADD8E6;
+          // color: #ADD8E6;
+          color: black;
         }
 
         .icon {
-          margin-right: 10px;
+          margin-right: 100px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        .keyframes move {
+          0% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0); }
+      }
+      
       `}</style>
     </nav>
   );

@@ -54,31 +54,33 @@ export default function CadastroCategoriaIngresso() {
     <div className="container">
       <div className="grid">
         <div className="form">
-          <h1>Categoria de Ingresso</h1>
+          <h1 style={{ color: '#ffffff' }}>Categoria de Ingresso</h1>
           <form onSubmit={handleSubmit} className="form">
             <div className="form-group">
-              <label htmlFor="nome">Nome:</label>
+              <label htmlFor="nome" style={{ color: '#ffffff' }}>Nome:</label>
               <input type="text" id="nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
             </div>
             <div className="form-group">
-              <label htmlFor="descricao">Descrição:</label>
+              <label htmlFor="descricao" style={{ color: '#ffffff' }}>Descrição:</label>
               <textarea id="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)} required />
             </div>
-            <button type="submit" className="button">Cadastrar Categoria de Ingresso</button>
+            <button type="submit" className="button" style={{ color: '#ffffff' }}>Cadastrar Categoria de Ingresso</button>
           </form>
-          {mensagem && <p>{mensagem}</p>}
+          {mensagem && <p style={{ color: '#ffffff' }}>{mensagem}</p>}
         </div>
         <div className="categorias">
-          <h2>Categoria Cadastradas</h2>
+          <h2 style={{ color: '#ffffff' }}>Categorias Cadastradas</h2>
           <ul>
             {categorias.map((categoria) => (
               <li key={categoria.id}>
-                <strong>{categoria.nome}</strong> - {categoria.descricao}
+                <strong style={{ color: '#ffffff' }}>{categoria.nome}</strong> - <span style={{ color: '#ffffff' }}>{categoria.descricao}</span>
               </li>
             ))}
           </ul>
         </div>
       </div>
+
+      
       <style jsx>{`
         .container {
           max-width: 800px;
